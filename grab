@@ -1,0 +1,5 @@
+#!/bin/sh
+git log --format=%B -n 1 $1 > /tmp/$1.txt
+git show $1 | git apply
+git commit -F /tmp/$1.txt .
+rm /tmp/$1.txt
