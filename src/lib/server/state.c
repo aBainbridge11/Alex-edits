@@ -585,11 +585,11 @@ static fr_state_entry_t *state_entry_create(fr_state_tree_t *state, request_t *r
 			 */
 			entry->state_comp.vx_0 = entry->state_comp.r_0 ^
 				((((uint32_t) HEXIFY(RADIUSD_VERSION)) >> 24) & 0xff);
-			entry->state_comp.vx_1 = entry->state_comp.r_0 ^
+			entry->state_comp.vx_1 = entry->state_comp.r_1 ^
 				((((uint32_t) HEXIFY(RADIUSD_VERSION)) >> 16) & 0xff);
-			entry->state_comp.vx_2 = entry->state_comp.r_0 ^
+			entry->state_comp.vx_2 = entry->state_comp.r_2 ^
 				((((uint32_t) HEXIFY(RADIUSD_VERSION)) >> 8) & 0xff);
-			entry->state_comp.vx_3 = entry->state_comp.r_0 ^
+			entry->state_comp.vx_3 = entry->state_comp.r_3 ^
 				(((uint32_t) HEXIFY(RADIUSD_VERSION)) & 0xff);
 		}
 
@@ -758,7 +758,7 @@ int fr_state_restore(fr_state_tree_t *state, request_t *request)
 	/* Probably impossible in the current code */
 	if (unlikely(entry->thawed && (entry->thawed != request))) {
 		RERROR("State entry has already been thawed by a request %"PRIu64, entry->thawed->number);
-		return -2;
+		return -1;
 	}
 
 	/*
