@@ -150,7 +150,7 @@ static inline void *fr_heap_peek(fr_heap_t *h)
  */
 static inline void *fr_heap_peek_at(fr_heap_t *h, fr_heap_index_t idx)
 {
-	if (unlikely(idx > h->num_elements)) return NULL;
+	if (unlikely((idx == 0) || (idx > h->num_elements))) return NULL;
 
 	return h->p[idx];
 }
