@@ -824,7 +824,9 @@ void fr_lst_verify(char const *file, int line, fr_lst_t const *lst)
 		bucket_size_sum = 0;
 
 		for (stack_index_t stack_index = 0; stack_index < depth; stack_index++)  {
-			fr_lst_index_t bucket_size = bucket_upb(lst, stack_index) - bucket_lwb(lst, stack_index) + 1;
+			fr_lst_index_t upb = bucket_upb(lst, stack_index);
+			fr_lst_index_t lwb = bucket_lwb(lst, stack_index);
+			fr_lst_index_t bucket_size = (upb >= lwb) ? upb - lwb + 1 : 0;
 			fr_fatal_assert_msg(bucket_size <= lst->num_elements,
 					    "CONSISTENCY CHECK FAILED %s[%i]: bucket %u size %u is invalid",
 					    file, line, stack_index, bucket_size);
