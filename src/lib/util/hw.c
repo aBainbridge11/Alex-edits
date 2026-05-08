@@ -84,7 +84,7 @@ uint32_t fr_hw_num_cores_active(void)
 		cpu = fopen(path, "r");
 		if (!cpu) break;
 
-		while (fscanf(cpu, "%[0-9]", buff)) {
+		while (fscanf(cpu, "%31[0-9]", buff)) {
 			tsibs++;
 			if (fgetc(cpu) != ',') break;
 		}
