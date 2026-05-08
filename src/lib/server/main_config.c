@@ -569,7 +569,10 @@ static int xlat_config_escape(UNUSED request_t *request, fr_value_box_t *vb, UNU
 	/*
 	 *	Replace the original string.
 	 */
-	(void) fr_value_box_bstrndup(vb, vb, vb->enumv, escaped, (size_t) (out - escaped), vb->tainted);
+	 if (fr_value_box_bstrndup(vb, vb, vb->enumv, escaped, (size_t) (out - escaped), vb->tainted) < 0) {
+		talloc_free(escaped);
+		return -1;
+	}
 	talloc_free(escaped);
 
 	return 0;
@@ -611,7 +614,10 @@ static xlat_action_t xlat_config(TALLOC_CTX *ctx, fr_dcursor_t *out,
 	if (!value) return XLAT_ACTION_DONE;
 
 	MEM(vb = fr_value_box_alloc_null(ctx));
-	fr_value_box_bstrndup(vb, vb, NULL, value, strlen(value), false);
+	if (fr_value_box_bstrndup(vb, vb, NULL, value, strlen(value), false) < 0) {
+		talloc_free(vb);
+		return XLAT_ACTION_FAIL;
+	}
 	fr_dcursor_append(out, vb);
 
 	return XLAT_ACTION_DONE;
