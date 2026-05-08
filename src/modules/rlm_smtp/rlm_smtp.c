@@ -504,6 +504,7 @@ static int body_init(fr_mail_ctx_t *uctx, curl_mime *mime)
 
 	/* initialize the cursor used by the body_source function*/
 	vp = fr_pair_dcursor_by_da_init(&uctx->body_cursor, &uctx->request->request_pairs, attr_smtp_body);
+	if (!vp) return 0;
 	fr_dbuff_init(&uctx->vp_in, (uint8_t const *)vp->vp_strvalue, vp->vp_length);
 
 	/* Add a mime part to mime_body for every body element */
@@ -557,7 +558,8 @@ static int attachments_source(fr_mail_ctx_t *uctx, curl_mime *mime, rlm_smtp_t c
 	fr_sbuff_in_bstrcpy_buffer(&path_buffer, inst->template_dir);
 
 	/* Make sure the template_directory path ends in a "/" */
-	if (inst->template_dir[talloc_array_length(inst->template_dir) - 2] != '/'){
+	if (talloc_array_length(inst->template_dir) > 1 &&
+	    inst->template_dir[talloc_array_length(inst->template_dir) - 2] != '/'){
 		(void) fr_sbuff_in_char(&path_buffer, '/');
 	}
 
@@ -790,7 +792,7 @@ static unlang_action_t CC_HINT(nonnull(1,2)) mod_authenticate(unlang_result_t *p
 	}
 
 	if (!env_data->password_tmpl) {
-		RDEBUG("No 'username' was set for authentication - failing the request");
+		RDEBUG("No 'password' was set for authentication - failing the request");
 		RETURN_UNLANG_INVALID;
 	}
 
