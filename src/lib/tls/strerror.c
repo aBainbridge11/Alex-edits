@@ -246,7 +246,7 @@ int fr_tls_strerror_drain(void)
 	drained++;
 
 	while ((error = ERR_get_error_all(&openssl_file, &openssl_line, &func, &data, &flags))) {
-		if (!(flags & ERR_TXT_STRING)) continue;
+		if (!(flags & ERR_TXT_STRING)) data = NULL;
 
 		ERR_error_string_n(error, buffer, sizeof(buffer));
 
