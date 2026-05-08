@@ -884,10 +884,15 @@ static inline char const *tmpl_attr_tail_unresolved(tmpl_t const *vpt)
  */
 static inline int16_t tmpl_attr_tail_num(tmpl_t const *vpt)
 {
+	tmpl_attr_t *ar;
+
 	tmpl_assert_type(tmpl_is_attr(vpt) ||
 			 tmpl_is_attr_unresolved(vpt));
 
-	return tmpl_attr_list_tail(tmpl_attr(vpt))->ar_num;
+	ar = tmpl_attr_list_tail(tmpl_attr(vpt));
+	if (!ar) return NUM_UNSPEC;
+
+	return ar->ar_num;
 }
 
 /** The number of attribute references contained within a tmpl
