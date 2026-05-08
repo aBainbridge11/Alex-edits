@@ -300,7 +300,7 @@ static size_t rest_encode_custom(void *out, size_t size, size_t nmemb, void *use
 	rlm_rest_request_t	*ctx = userdata;
 	rest_custom_data_t	*data = ctx->encoder;
 
-	size_t			freespace = (size * nmemb) - 1;
+	size_t			freespace = (size * nmemb);
 	size_t			len;
 	size_t			to_copy;
 
@@ -362,7 +362,7 @@ static size_t rest_encode_post(void *out, size_t size, size_t nmemb, void *userd
 
 	size_t			len = 0;
 	ssize_t			slen;
-	size_t			freespace = (size * nmemb) - 1;
+	size_t			freespace = (size * nmemb);
 
 	char			*p = out;	/* Position in buffer */
 	char			*encoded = p;	/* Position in buffer of last fully encoded attribute or value */
