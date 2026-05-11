@@ -396,9 +396,9 @@ static int mod_priority_set(void const *instance, uint8_t const *buffer, size_t 
 {
 	proto_tacacs_t const *inst = talloc_get_type_abort_const(instance, proto_tacacs_t);
 
-	fr_assert(FR_TACACS_PACKET_CODE_VALID(buffer[1]));
-
 	if (!buflen) return 0;
+
+	fr_assert(FR_TACACS_PACKET_CODE_VALID(buffer[1]));
 
 	/*
 	 *	Disallowed packet
