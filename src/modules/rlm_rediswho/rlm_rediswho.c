@@ -161,6 +161,10 @@ static int rediswho_command(rlm_rediswho_t const *inst, request_t *request, char
 		if (reply->integer > 0) ret = reply->integer;
 		break;
 
+	case REDIS_REPLY_STATUS:
+		ret = 0;
+		break;
+
 	/*
 	 *	We don't know to interpret this, the user has probably messed
 	 *	up the queries, so print an error message and fail.
