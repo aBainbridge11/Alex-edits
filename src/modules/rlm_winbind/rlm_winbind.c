@@ -326,7 +326,7 @@ static xlat_action_t winbind_ping_xlat(TALLOC_CTX *ctx, fr_dcursor_t *out,
 	} else {
 		char const *err_str = wbcErrorString(err);
 
-		if (err_str) {
+		if (err_info) {
 			RERROR("Ping failed (%s) to DC %s after %pVms%s%s", err_str, dc,
 			       fr_box_time_delta_msec(fr_time_sub(now, then)),
 			       err_info->display_string ? " - " : "",
