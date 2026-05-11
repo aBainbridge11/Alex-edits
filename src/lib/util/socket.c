@@ -797,6 +797,8 @@ int fr_socket_wait_for_connect(int sockfd, fr_time_delta_t timeout)
 	} while ((ret == -1) && (errno == EINTR));
 
 	switch (ret) {
+	case 2: /* both write and error sets triggered */
+	FALL_THROUGH;
 	case 1: /* ok (maybe) */
 	{
 		int error;
