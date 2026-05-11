@@ -1154,7 +1154,7 @@ static int perl_sv_to_vblist(TALLOC_CTX *ctx, fr_value_box_list_t *list, request
 		sv_len = av_len(av);
 		for (i = 0; i <= sv_len; i++) {
 			av_sv = av_fetch(av, i, 0);
-			if (SvOK(*av_sv)) {
+			if (av_sv && SvOK(*av_sv)) {
 				if (perl_sv_to_vblist(ctx, list, request, *av_sv) < 0) return -1;
 			}
 		}
