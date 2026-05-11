@@ -120,28 +120,28 @@ static void CC_HINT(nonnull) tls_engine_control_notfound_strerror(ENGINE *e, cha
 		/*
 		 *	Copy the ctrl name out to a temporary buffer
 		 */
-		name_len = ENGINE_ctrl(e, ENGINE_CTRL_GET_NAME_LEN_FROM_CMD, 0, NULL, NULL);
+		name_len = ENGINE_ctrl(e, ENGINE_CTRL_GET_NAME_LEN_FROM_CMD, cmd, NULL, NULL);
 		if (unlikely(name_len == 0)) continue;
 
 		name = talloc_array(pool, char, name_len + 1);
 		if (unlikely(!name)) break;
 
-		if (unlikely(ENGINE_ctrl(e, ENGINE_CTRL_GET_NAME_FROM_CMD, 0, name, NULL) <= 0)) break;
+		if (unlikely(ENGINE_ctrl(e, ENGINE_CTRL_GET_NAME_FROM_CMD, cmd, name, NULL) <= 0)) break;
 
 		/*
 		 *	Copy the ctrl description out to a temporary buffer
 		 */
-		desc_len = ENGINE_ctrl(e, ENGINE_CTRL_GET_DESC_LEN_FROM_CMD, 0, NULL, NULL);
+		desc_len = ENGINE_ctrl(e, ENGINE_CTRL_GET_DESC_LEN_FROM_CMD, cmd, NULL, NULL);
 		if (desc_len > 0) {
 			desc = talloc_array(pool, char, desc_len + 1);
 			if (unlikely(!desc)) break;
 
-			if (unlikely(ENGINE_ctrl(e, ENGINE_CTRL_GET_DESC_FROM_CMD, 0, desc, NULL) <= 0)) break;
+			if (unlikely(ENGINE_ctrl(e, ENGINE_CTRL_GET_DESC_FROM_CMD, cmd, desc, NULL) <= 0)) break;
 		} else {
 			desc = NULL;
 		}
 
-		ret = ENGINE_ctrl(e, ENGINE_CTRL_GET_CMD_FLAGS, 0, NULL, NULL);
+		ret = ENGINE_ctrl(e, ENGINE_CTRL_GET_CMD_FLAGS, cmd, NULL, NULL);
 		if (ret & ENGINE_CMD_FLAG_NO_INPUT) {
 			flags = "none";
 		} else if ((ret & ENGINE_CMD_FLAG_NUMERIC) && (ret & ENGINE_CMD_FLAG_STRING)) {
