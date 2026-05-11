@@ -91,10 +91,10 @@ static inline bool is_whitespace(char const *value)
  	size_t	clen;
  	size_t	i;
 
- 	for (i = 0; i < len; i++) {
+ 	for (i = 0; i < len; ) {
  		clen = fr_utf8_char(p, len - i);
  		if (clen == 0) return false;
- 		i += (size_t)clen;
+ 		i += clen;
  		p += clen;
  	}
  	return true;
