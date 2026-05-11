@@ -213,6 +213,7 @@ static int sync_new_cookie(bool *new_cookie, sync_state_t *sync, BerElement *ber
 
 	talloc_free(sync->cookie);
 	sync->cookie = fr_ldap_berval_to_bin(sync, &cookie);
+	if (!sync->cookie) return -1;
 	cookie_len = talloc_array_length(sync->cookie);
 	DEBUG3("Got new cookie value \"%pV\" (%zu)",
 	       fr_box_strvalue_len((char const *)sync->cookie, cookie_len), cookie_len);
@@ -472,13 +473,16 @@ int rfc4533_sync_intermediate(sync_state_t *sync, LDAPMessage *msg, UNUSED LDAPC
 
 	if (!oid || (strcmp(oid, LDAP_SYNC_INFO) != 0)) {
 		WARN("Ignoring intermediateResult with unexpected OID \"%s\"", oid ? oid : "<unknown>");
+		if (oid) ldap_memfree(oid);
+		if (data) ber_bvfree(data);
 		return 0;
 	}
 
 	ber = ber_init(data);
 	if (ber == NULL) {
 		ERROR("Failed allocating ber to handle syncInfo data");
-
+		ldap_memfree(oid);
+		ber_bvfree(data);
 		return -1;
 	}
 
