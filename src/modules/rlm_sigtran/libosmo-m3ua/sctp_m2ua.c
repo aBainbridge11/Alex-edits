@@ -778,7 +778,7 @@ int sctp_m2ua_transport_bind(struct sctp_m2ua_transport *trans,
 	struct sockaddr_in addr;
 
 	sctp = socket(PF_INET, SOCK_STREAM, IPPROTO_SCTP);
-	if (!sctp) {
+	if (sctp < 0) {
 		LOGP(DINP, LOGL_ERROR, "Failed to create socket.\n");
 		return -1;
 	}
