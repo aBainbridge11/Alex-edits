@@ -161,7 +161,7 @@ int unbound_log_init(TALLOC_CTX *ctx, unbound_log_t **u_log_out, struct ub_ctx *
 		return -1;
 	}
 
-	if (strcmp(val, "yes") == 0) {
+	if (val[0] != '\0') {
 		WARN("Disabling unbound logfile output (logfile: %s) > (logfile: no)", val);
 
 		ret = ub_ctx_set_option(ub, "logfile:", "no");
