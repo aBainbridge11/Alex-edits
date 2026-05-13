@@ -1485,11 +1485,6 @@ static unlang_action_t CC_HINT(nonnull)  mod_autz_group_resume(unlang_result_t *
 		do_fall_through = fall_through(&autz_ctx->reply_tmp);
 
 	group_attr_cache:
-		if (inst->config.cache_groups && autz_ctx->status & SQL_AUTZ_STAGE_GROUP) {
-			MEM(pair_append_control(&vp, inst->group_da) >= 0);
-			fr_pair_value_strdup(vp, autz_ctx->group->name, true);
-		}
-
 		if (map_list_num_elements(&autz_ctx->reply_tmp) == 0) goto next_group_find;
 		RDEBUG2("%s \"%pV\": Merging control and reply items",
 			autz_ctx->status & SQL_AUTZ_STAGE_GROUP ? "Group" : "Profile", &autz_ctx->sql_group->data);
