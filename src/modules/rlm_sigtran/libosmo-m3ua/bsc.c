@@ -95,8 +95,9 @@ struct bsc_data *bsc_data_create()
 	return bsc;
 }
 
-static void sigint()
+static void sigint(int sig)
 {
+	(void)sig;
 	static pthread_mutex_t exit_mutex = PTHREAD_MUTEX_INITIALIZER;
 	static int handled = 0;
 
@@ -121,13 +122,15 @@ out:
 	pthread_mutex_unlock(&exit_mutex);
 }
 
-static void sigusr1()
+static void sigusr1(int sig)
 {
+	(void)sig;
 	talloc_report_full(bsc, stderr);
 }
 
-static void sigusr2()
+static void sigusr2(int sig)
 {
+	(void)sig;
 	struct msc_connection *msc;
 	printf("Closing the MSC connection on demand.\n");
 
@@ -149,7 +152,6 @@ static void print_help()
 	printf("  -h --help this text\n");
 	printf("  -c --config=CFG The config file to use.\n");
 	printf("  -p --pcap=FILE. Write MSUs to the PCAP file.\n");
-	printf("  -c --once. Send the SLTM msg only once.\n");
 	printf("  -v --version. Print the version number\n");
 }
 
