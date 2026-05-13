@@ -214,11 +214,15 @@ static sql_rcode_t sql_query(request_t *request, rlm_sql_freetds_conn_t *conn, c
 
 	if (ct_command(conn->command, CS_LANG_CMD, query, CS_NULLTERM, CS_UNUSED) != CS_SUCCEED) {
 		ROPTIONAL(RERROR, ERROR, "Unable to initialise command structure (ct_command())");
+		ct_cmd_drop(conn->command);
+		conn->command = NULL;
 		return RLM_SQL_ERROR;
 	}
 
 	if (ct_send(conn->command) != CS_SUCCEED) {
 		ROPTIONAL(RERROR, ERROR, "Unable to send command (ct_send())");
+		ct_cmd_drop(conn->command);
+		conn->command = NULL;
 		return RLM_SQL_ERROR;
 	}
 
@@ -441,11 +445,15 @@ static sql_rcode_t sql_select_query(request_t *request, rlm_sql_freetds_conn_t *
 
 	if (ct_command(conn->command, CS_LANG_CMD, query, CS_NULLTERM, CS_UNUSED) != CS_SUCCEED) {
 		ROPTIONAL(RERROR, ERROR, "unable to initiate command structure (ct_command()");
+		ct_cmd_drop(conn->command);
+		conn->command = NULL;
 		return RLM_SQL_ERROR;
 	}
 
 	if (ct_send(conn->command) != CS_SUCCEED) {
 		ROPTIONAL(RERROR, ERROR, "unable to send command (ct_send())");
+		ct_cmd_drop(conn->command);
+		conn->command = NULL;
 		return RLM_SQL_ERROR;
 	}
 
