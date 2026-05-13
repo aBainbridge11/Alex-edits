@@ -317,7 +317,7 @@ static void test_bstrncpy_until(void)
 	char const	in_long[] = "i am a longer test string";
 	char		out[18 + 1];
 	fr_sbuff_t	sbuff;
-	ssize_t		slen;
+	ssize_t		slen = 0;
 
 	fr_sbuff_init_in(&sbuff, in, sizeof(in) - 1);
 
@@ -698,7 +698,7 @@ static void test_unescape_multi_char_terminals(void)
 {
 	char const		in[] = "foo, bar, baz```";
 	fr_sbuff_t		sbuff;
-	ssize_t			slen;
+	ssize_t			slen = 0;
 	fr_sbuff_term_t		tt = FR_SBUFF_TERMS(
 					L(","),
 					L("```"),
@@ -733,7 +733,7 @@ static void test_eof_terminal(void)
 {
 	char const		in[] = "foo, bar";
 	fr_sbuff_t		sbuff;
-	ssize_t			slen;
+	ssize_t			slen = 0;
 	fr_sbuff_term_t		tt_eof = FR_SBUFF_TERMS(
 					L(""),
 					L(","),
