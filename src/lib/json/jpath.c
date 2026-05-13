@@ -106,7 +106,7 @@ static char const escape_chars[] = "[],*.:()?";
 ssize_t fr_jpath_escape_func(UNUSED request_t *request, char *out, size_t outlen, char const *in, UNUSED void *arg)
 {
 	char const *p = in;
-	char *q = out, *end = out + outlen;
+	char *q = out, *end = out + outlen - 1;	/* -1 for null terminator */
 
 	if (outlen == 0) return 0;
 
