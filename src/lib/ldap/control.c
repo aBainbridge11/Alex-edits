@@ -177,7 +177,7 @@ int fr_ldap_control_add_session_tracking(fr_ldap_connection_t *conn, request_t *
 
 	int			ret;
 
-	char			ipaddress[INET6_ADDRSTRLEN];
+	char			ipaddress[INET6_ADDRSTRLEN] = "";
 	char			*username = NULL;
 	char			*acctsessionid = NULL;
 	char			*acctmultisessionid = NULL;
