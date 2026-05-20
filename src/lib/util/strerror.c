@@ -795,7 +795,7 @@ char const *fr_perror_to_str(char const *line_sep, char const *fmt, ...)
 	if (error) {
 		if (fr_sbuff_in_sprintf(agg, "%s: %s%s", prefix, error, line_sep) < 0) return NULL;
 	} else {
-		if (fr_sbuff_in_sprintf(agg, "%s%s", prefix, error, line_sep) < 0) return NULL;
+		if (fr_sbuff_in_sprintf(agg, "%s%s", prefix, line_sep) < 0) return NULL;
 		talloc_free(prefix);
 		return NULL;
 	}
