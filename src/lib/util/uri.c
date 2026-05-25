@@ -147,7 +147,7 @@ int fr_uri_escape_list(fr_value_box_list_t *uri, fr_uri_part_t const *uri_parts,
 	fr_strerror_clear();
 
 	fr_value_box_list_foreach(uri, uri_vb) {
-		if (unlikely(fr_uri_escape(uri_vb, &ctx)) < 0) return -1;
+		if (unlikely(fr_uri_escape(uri_vb, &ctx) < 0)) return -1;
 	}
 
 	return 0;
