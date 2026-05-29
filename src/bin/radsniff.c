@@ -208,12 +208,7 @@ static void rs_time_print(char *out, size_t len, struct timeval const *t)
 
 	usec = t->tv_usec;
 
-	if (usec) {
-		while (usec < 100000) usec *= 10;
-		snprintf(out + ret, len - ret, ".%u", usec);
-	} else {
-		snprintf(out + ret, len - ret, ".000000");
-	}
+	snprintf(out + ret, len - ret, ".%06u", usec);
 }
 
 static size_t rs_snprint_csv(char *out, size_t outlen, char const *in, size_t inlen)
