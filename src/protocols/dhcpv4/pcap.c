@@ -85,6 +85,12 @@ int fr_dhcpv4_pcap_send(fr_pcap_t *pcap, uint8_t *dst_ether_addr, fr_packet_t *p
 
 	/* DHCP layer (L7) */
 	/* just copy what FreeRADIUS has encoded for us. */
+	size_t header_len = (size_t)(end - dhcp_packet);
+	if (packet->data_len > sizeof(dhcp_packet) - header_len) {
+		fr_strerror_printf("DHCP packet too large (%zu bytes), maximum %zu bytes",
+						packet->data_len, sizeof(dhcp_packet) - header_len);
+		return -1;
+	}
 	memcpy(end, packet->data, packet->data_len);
 
 	/* UDP checksum is done here */
