@@ -535,7 +535,7 @@ static int radius_fixups(rlm_radius_t const *inst, request_t *request)
 	 *
 	 *	There should _never_ be two instances of the same Proxy-State in the packet.
 	 */
-	if ((inst->mode == RLM_RADIUS_MODE_PROXY) && RDEBUG_ENABLED) {
+	if (inst->mode == RLM_RADIUS_MODE_PROXY) {
 		unsigned int count = 0;
 		fr_dcursor_t cursor;
 
