@@ -270,7 +270,7 @@ static int sim_array_members(size_t *out, size_t len, fr_dict_attr_t const *da)
 
 	if (element_len == 1) {
 		*out = 1;
-		return 1;	/* Fast path */
+		return len;	/* Fast path */
 	}
 
 	if (!fr_cond_assert(element_len > 0)) return -1;
