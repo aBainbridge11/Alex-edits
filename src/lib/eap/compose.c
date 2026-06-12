@@ -100,7 +100,8 @@ static int eap_wireformat(eap_packet_t *reply)
 	if(reply->packet != NULL) return 0;
 
 	total_length = EAP_HEADER_LEN;
-	if (reply->code == FR_EAP_CODE_REQUEST) {
+	if ((reply->code == FR_EAP_CODE_REQUEST) ||
+	    (reply->code == FR_EAP_CODE_RESPONSE)) {
 		total_length += 1/* EAP Method */;
 		if (reply->type.data && (reply->type.length > 0)) {
 			if (reply->type.length > (size_t) (UINT16_MAX - total_length)) {
