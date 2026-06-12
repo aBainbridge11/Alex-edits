@@ -90,7 +90,7 @@ ssize_t	fr_bio_buf_write(fr_bio_buf_t *bio_buf, const void *buffer, size_t size)
 	room = fr_bio_buf_write_room(bio_buf);
 
 	if (room < size) {
-		return -room;	/* how much more room we would need */
+		return -(ssize_t)(size - room);	/* how much more room we would need */
 	}
 
 	/*
