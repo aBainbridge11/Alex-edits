@@ -71,7 +71,7 @@ int paircmp_pairs(UNUSED request_t *request, fr_pair_t const *check, fr_pair_t *
 		ssize_t		slen;
 		regex_t		*preg = NULL;
 		uint32_t	subcaptures;
-		fr_regmatch_t	*regmatch;
+		fr_regmatch_t	*regmatch = NULL;
 
 		char *expr = NULL, *value = NULL;
 		char const *expr_p, *value_p;
@@ -95,6 +95,7 @@ int paircmp_pairs(UNUSED request_t *request, fr_pair_t const *check, fr_pair_t *
 
 		regex_error:
 			talloc_free(preg);
+			talloc_free(regmatch);
 			talloc_free(expr);
 			talloc_free(value);
 			return -2;
@@ -207,7 +208,7 @@ int paircmp_pairs(UNUSED request_t *request, fr_pair_t const *check, fr_pair_t *
 
 		case FR_TYPE_IFID:
 			return CMP(memcmp(vp->vp_ifid, check->vp_ifid, sizeof(vp->vp_ifid)), 0);
-			
+
 		default:
 			return -2;
 	}
