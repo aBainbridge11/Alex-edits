@@ -702,7 +702,7 @@ void log_request_perror(fr_log_type_t type, fr_log_lvl_t lvl, request_t *request
 			va_list copy;
 			va_copy(copy, ap);
 
-			dst_p->func(type, lvl, request, file, line, fmt, ap, dst_p->uctx);
+			dst_p->func(type, lvl, request, file, line, fmt, copy, dst_p->uctx);
 
 			va_end(copy);
 		}
