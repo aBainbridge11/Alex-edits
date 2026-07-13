@@ -441,7 +441,7 @@ void	log_global_free(void);
  */
 #  define RINDENT() do {\
 	if (request->module) {\
-		request->log.indent.unlang += 2;\
+		request->log.indent.module += 2;\
 	} else {\
 		request->log.indent.unlang += 2;\
 	}\
@@ -454,7 +454,7 @@ void	log_global_free(void);
  */
 #  define REXDENT() do {\
 	if (request->module) {\
-		request->log.indent.unlang -= 2;\
+		request->log.indent.module -= 2;\
 	} else {\
 		request->log.indent.unlang -= 2;\
 	}\
