@@ -282,7 +282,7 @@ struct tmpl_attr_rules_s {
 	FR_DLIST_HEAD(tmpl_request_list) _CONST *request_def;	//!< Default request to use with
 							///< unqualified attribute references.
 							///< If NULL the request is assumed to
-							///< but the current request.
+							///< be the current request.
 							///< Usually this will be one of
 							///< - tmpl_request_def_current
 							///< - tmpl_request_def_outer
