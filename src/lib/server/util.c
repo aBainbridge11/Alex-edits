@@ -240,6 +240,7 @@ ssize_t rad_filename_escape(UNUSED request_t *request, char *out, size_t outlen,
 		/*
 		 *	Unsafe chars get escaped as -XX.
 		 */
+		if (freespace <= 3) break;
 		snprintf(out, freespace, "-%02x", (uint8_t) in[0]);
 		in++;
 		out += 3;
