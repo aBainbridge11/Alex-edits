@@ -677,7 +677,8 @@ static void session_msg_log(request_t *request, fr_tls_session_t *tls_session, u
 			 *	Range guard not needed due to size of array
 			 *	and underlying type.
 			 */
-			if (!tls_handshake_type_str[tls_session->info.handshake_type]) {
+			if (((size_t)tls_session->info.handshake_type >= NUM_ELEMENTS(tls_handshake_type_str)) ||
+			    !tls_handshake_type_str[tls_session->info.handshake_type]) {
 				snprintf(unknown_handshake_type, sizeof(unknown_handshake_type),
 					 "unknown_handshake_type_0x%02x", tls_session->info.handshake_type);
 				str_details1 = unknown_handshake_type;
