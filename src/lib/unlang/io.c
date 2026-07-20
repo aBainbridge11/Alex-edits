@@ -71,7 +71,7 @@ request_t *unlang_io_subrequest_alloc(request_t *parent, fr_dict_t const *namesp
 	/*
 	 *	Initialize all of the async fields.
 	 */
-	child->async = talloc_zero(child, fr_async_t);
+	MEM(child->async = talloc_zero(child, fr_async_t));
 
 #define COPY_FIELD(_x) child->async->_x = parent->async->_x
 	COPY_FIELD(recv_time);
