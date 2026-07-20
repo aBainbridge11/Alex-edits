@@ -107,6 +107,7 @@ static int _unlang_global_init(UNUSED void *uctx)
 	if (xlat_global_init() < 0) {
 	fail:
 		TALLOC_FREE(unlang_ctx);
+		unlang_op_table = NULL;
 
 		memset(unlang_ops, 0, sizeof(unlang_ops));
 		return -1;
