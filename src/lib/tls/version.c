@@ -61,7 +61,7 @@ int fr_openssl_version_consistent(void)
 	 *
 	 *	https://openssl-library.org/policies/releasestrat/index.html
 	 */
-	if ((ssl_linked & 0xff000000) != (ssl_built & 0xff000000)) {
+	if ((ssl_linked & 0xf0000000) != (ssl_built & 0xf0000000)) {
 		ERROR("libssl version mismatch.  built: %lx linked: %lx",
 		      (unsigned long) ssl_built,
 		      (unsigned long) ssl_linked);
