@@ -722,7 +722,7 @@ ssize_t fr_dns_label_from_value_box(size_t *need, uint8_t *buf, size_t buf_len, 
 				fr_strerror_const("Double dots '..' are forbidden");
 				return -1;
 			}
-			last = q;
+			last = q + 1;
 
 			/*
 			 *	We had a dot, allow underscore as the
