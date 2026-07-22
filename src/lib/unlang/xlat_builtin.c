@@ -3618,7 +3618,7 @@ static int xlat_func_subst_regex(TALLOC_CTX *ctx, fr_dcursor_t *out,
 		sbuff = FR_SBUFF_IN(regex_vb->vb_strvalue, regex_vb->vb_length);
 		if (fr_sbuff_len(&sbuff) == 0) {
 			REDEBUG("Regex must not be empty");
-			return XLAT_ACTION_FAIL;
+			return -1;
 		}
 
 		fr_sbuff_next(&sbuff); /* skip leading slash */
