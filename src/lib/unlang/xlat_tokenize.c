@@ -816,7 +816,6 @@ check_for_attr:
 	 *	- '[' - Which is an attribute index, so it must be an attribute.
 	 *      - '}' - The end of the expansion, which means it was a bareword.
 	 */
-	case '.':
 	case '}':
 	case '[':
 		fr_sbuff_set(in, &m_s);		/* backtrack */
