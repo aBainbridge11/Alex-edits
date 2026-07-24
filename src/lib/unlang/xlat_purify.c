@@ -224,6 +224,7 @@ static int xlat_purify_list_internal(xlat_exp_head_t *head, request_t *request, 
 					node = child;
 				}
 				talloc_free(to_free);
+				continue;
 			}
 		}
 			break;
