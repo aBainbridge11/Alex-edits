@@ -262,10 +262,10 @@ xlat_t *xlat_func_register(TALLOC_CTX *ctx, char const *name, xlat_func_t func, 
 	 */
 	MEM(c = talloc(NULL, xlat_t));
 	*c = (xlat_t){
-		.name = talloc_strdup(c, name),
 		.func = func,
 		.return_type = return_type,
 	};
+	MEM(c->name = talloc_strdup(c, name));
 
  	/*
 	 *	Don't allocate directly in the parent ctx, it might be mprotected
