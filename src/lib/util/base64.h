@@ -60,7 +60,6 @@ static inline bool fr_is_base64_nstd(char c, uint8_t const alphabet[static SBUFF
 	return alphabet[(uint8_t)c] < 64;
 }
 
-size_t		fr_base64_encode(char * restrict out, size_t outlen, uint8_t const * restrict in, size_t inlen);
 #define		fr_is_base64(_c) fr_is_base64_nstd(_c, fr_base64_alphabet_decode)
 
 
