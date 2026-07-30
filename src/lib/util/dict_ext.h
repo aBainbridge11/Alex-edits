@@ -190,8 +190,8 @@ static inline uint32_t fr_dict_vendor_num_by_da(fr_dict_attr_t const *da)
  * @param[in] da		The dictionary attribute to find the
  *				vendor for.
  * @return
- *	- 0 this isn't a vendor specific attribute.
- *	- The vendor PEN.
+ *	- NULL if this isn't a vendor specific attribute.
+ *	- The ancestor attribute of type #FR_TYPE_VENDOR.
  */
 static inline fr_dict_attr_t const *fr_dict_vendor_da_by_da(fr_dict_attr_t const *da)
 {
