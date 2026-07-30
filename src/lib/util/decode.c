@@ -63,7 +63,7 @@ ssize_t fr_pair_array_from_network(TALLOC_CTX *ctx, fr_pair_list_t *out, fr_dict
 		slen = decode_value(ctx, &list, parent, p, (end - p), decode_ctx);
 		if (slen <= 0) {
 			fr_pair_list_free(&list);
-			return slen - (p - data);
+			fr_pair_decode_slen(slen, data, p);
 		}
 
 		p += slen;
