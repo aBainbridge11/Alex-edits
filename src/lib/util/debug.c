@@ -1011,7 +1011,7 @@ int fr_log_talloc_report(TALLOC_CTX const *ctx)
 			talloc_report_full(ctx, log);
 		} while ((ctx = talloc_parent(ctx)) &&
 			 (i < TALLOC_REPORT_MAX_DEPTH) &&
-			 (talloc_parent(ctx) != talloc_autofree_ctx) &&	/* Stop before we hit the autofree ctx */
+			 (talloc_parent(ctx) != talloc_autofree_context_global()) &&	/* Stop before we hit the autofree ctx */
 			 (talloc_parent(ctx) != talloc_null_ctx()));  	/* Stop before we hit NULL ctx */
 	}
 
